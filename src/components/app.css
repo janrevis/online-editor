@@ -1,0 +1,9 @@
+.app-container {
+    display: flex;
+}
+
+.app-section {
+    width: 20%;
+    height: 800px;
+    border: 1px solid;
+}

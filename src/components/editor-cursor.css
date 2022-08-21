@@ -1,0 +1,8 @@
+.editor-cursor {
+    width: 5px;
+    border: none;
+}
+
+.editor-cursor:focus {
+    outline: none;
+}
