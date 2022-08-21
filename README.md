@@ -1,10 +1,11 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is something I'm messing with to try out some concepts.  
 
-## Available Scripts
-
-In the project directory, you can run:
+Near term goals:
+a React base text editor.
+- Basic abiilty to navigate, copy/paste, edit content
+- Abilty to set font sizes and styles
+- Stream data to a JSON that can be exported/saved
 
 ### `npm start`
 
