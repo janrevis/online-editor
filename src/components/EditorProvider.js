@@ -1,7 +1,7 @@
 import { useEffect, useReducer } from "react"
 import defaultDocument from "../model/default-document"
 import EditorContext from "./contexts/EditorContext"
-import DocumentModel from "../model/DocumentModel"
+import DocumentModel from "../model/DocumentModel.ts"
 
 let documentModel
 

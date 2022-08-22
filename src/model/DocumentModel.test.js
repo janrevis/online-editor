@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import DocumentModel from "./DocumentModel"
+import DocumentModel from "./DocumentModel.ts"
 
 describe("document nodel", () => {
     
@@ -41,21 +41,18 @@ describe("document nodel", () => {
             docModel.getModel().children.forEach(ch => checkNode(ch))
             expect(dump).toEqual({
                 tag: "div",
-                attributes: {},
                 children: [
                     {
                         tag: "p",
-                        attributes: {},
                         children: [
                             "abcd",
-                            { tag: "s", attributes: {}, children: [ "1234" ] },
-                            { tag: "s", attributes: {}, children: [ "5678" ] }
+                            { tag: "s", children: [ "1234" ] },
+                            { tag: "s", children: [ "5678" ] }
                         ]
                     },
                     {
                         tag: "p",
-                        attributes: {},
-                        children: [ "asdf", { tag: "EditorCursor", attributes: {} } ]
+                        children: [ "asdf", { tag: "EditorCursor" } ]
                     },
                 ]    
             })
@@ -68,11 +65,9 @@ describe("document nodel", () => {
         let docModel
         const baseDocument = {
             tag: "div",
-            attributes: {},
             children: [
                 {
                     tag: "p",
-                    attributes: {},
                     children: [{ tag: "EditorCursor"}]
                 }
             ]
@@ -91,16 +86,13 @@ describe("document nodel", () => {
             docModel.enterTextCharacter("a")
             expect(docModel.dumpDoc()).toEqual({
                 tag: "div",
-                attributes: {},
                 children: [
                     {
                         tag: "p",
-                        attributes: {},
                         children: [ 
                             "a", 
                             { 
                                 tag: "EditorCursor",
-                                attributes: {},
                             } 
                         ]
                     },
@@ -143,25 +135,21 @@ describe("document nodel", () => {
             docModel.enterTextCharacter("a")
             expect(docModel.dumpDoc()).toEqual({
                 tag: "div",
-                attributes: {},
                 children: [
                     {
                         tag: "p",
-                        attributes: {},
                         children: [
                             "wrong node 1",
-                            { tag: "s", attributes: {}, children: [ "wrong node 2" ] },
-                            { tag: "s", attributes: {}, children: [ "wrong node 3" ] }
+                            { tag: "s", children: [ "wrong node 2" ] },
+                            { tag: "s", children: [ "wrong node 3" ] }
                         ]
                     },
                     {
                         tag: "p",
-                        attributes: {},
                         children: [ 
                             "correct text node founda", 
                             { 
                                 tag: "EditorCursor",
-                                attributes: {},
                             } 
                         ]
                     },
@@ -212,7 +200,6 @@ describe("document nodel", () => {
             docModel.backspaceTextCharacter()
             expect(docModel.dumpDoc()).toEqual({
                 "tag": "div",
-                attributes: {},
                 "children": [
                   {
                     "tag": "p",
@@ -234,7 +221,6 @@ describe("document nodel", () => {
                           "firs",
                           {
                             "tag": "EditorCursor",
-                            attributes: {},
                           }    
                         ]
                       },
@@ -275,19 +261,16 @@ describe("document nodel", () => {
             docModel.backspaceTextCharacter()
             expect(docModel.dumpDoc()).toEqual({
                 tag: "div",
-                attributes: {},
                 children: [
                     {
                         tag: "p",
-                        attributes: {},
                         children: [
                             "abcd",
-                            { tag: "s", attributes: {}, children: [ "1234" ] },
-                            { tag: "s", attributes: {}, children: [ 
+                            { tag: "s", children: [ "1234" ] },
+                            { tag: "s", children: [ 
                                 "567",
                                 { 
                                     tag: "EditorCursor",
-                                    attributes: {},
                                 },
                             ] },
                         ]
@@ -327,37 +310,27 @@ describe("document nodel", () => {
             docModel.backspaceTextCharacter()
             expect(docModel.dumpDoc()).toEqual({
                 tag: "div",
-                attributes: {},
                 children: [
                     {
                         tag: "p",
-                        attributes: {},
                         children: [
                             "abcd",
-                            { tag: "s", attributes: {}, children: [ "1234" ] },
-                            { tag: "s", attributes: {}, children: [ "5678" ] }
+                            { tag: "s", children: [ "1234" ] },
+                            { tag: "s", children: [ "5678" ] }
                         ]
                     },
                     {
                         tag: "p",
-                        attributes: {},
                         children: [ 
                             "asd", 
                             { 
                                 tag: "EditorCursor",
-                                attributes: {}
                             } 
                         ]
                     },
                 ]    
             })
         })
-
-        it("deletes character when buffer is empty", () => {
-
-        })
-
-
     })
 
     describe("find previous text node in parent", () => {
