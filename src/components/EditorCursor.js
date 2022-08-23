@@ -6,10 +6,6 @@ import "./editor-cursor.css"
 const BACK_SPACE = "Backspace"
 const ENTER = "Enter"
 
-const appendCharacterTextNode = (editorId, content, ch) => {
-
-}
-
 const EditorCursor = (props) => {
     
     const { dispatch } = useContext(EditorContext)

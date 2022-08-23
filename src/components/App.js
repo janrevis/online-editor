@@ -34,8 +34,11 @@ const docContent = {
                 }
             },
             children: [
-                "I am",
-                { tag: "EditorCursor"}
+                "I am blah",
+                { tag: "EditorCursor"},
+                "blah",
+                { tag: "br" },
+                "blah"
             ],
         },
     ]

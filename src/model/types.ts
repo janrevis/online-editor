@@ -1,28 +1,21 @@
 
-export interface TextNode {
-    value: string
-    parent: Node
-    id?: string
-    attributes?: Attributes
-}
-
 export interface Attributes {
     [key: string]: string    
 }
 
 export interface Node {
-    id: string
+    id?: string
     tag: string
     attributes?: Attributes
-    parent?: Node | {}
-    children?: Array<Node | TextNode>
+    parent?: Node
+    children?: Array<Node>
     value?: string
 }
 
 export interface DocumentNode {
-    tag: string
+    tag?: string
     attributes?: Attributes
-    children?: Array<DocumentNode>
+    children?: Array<DocumentNode | string>
 }
 
 
