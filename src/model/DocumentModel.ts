@@ -170,24 +170,22 @@ class DocumentModel {
                 throw new Error("backspaceTextCharacter: value is not defined")
             }
             newTextNode.value = newTextNode.value.substring(0, newTextNode.value.length - 1)
-            this.insertNodeAtIndex(
-                parent, newTextNodeIndex + 1, 
-                { tag: "EditorCursor", id: v4(), parent }
-            )
-            const cChildren = cParent.children as Array<Node>
-            const pChildren = parent.children as Array<Node>
-            if (cChildren.length === 1) {
-                // after deleting the old cursor the node will be empty so remove the 
-                // whole node
-                const superParent = cParent.parent as Node
-                const superChildren = superParent.children as Array<Node>
-                const parentIndex = superChildren.findIndex(n => n === textNode.parent)
-                superChildren.splice(parentIndex, 1) 
-            } else {
-                const cIndex = this.#getCursorIndex()
-                cChildren.splice(cIndex, 1)
-            }
-            this.#cursor = pChildren[newTextNodeIndex + 1] as Node
+            const oldCursor = this.#cursor
+            this.moveCursorTo(parent, newTextNodeIndex)
+            this.removeEmptyNode(oldCursor)
+        }
+    }
+
+    removeEmptyNode(node: Node) {
+        if (!node?.parent?.children) {
+            return
+        }
+        if (node?.parent?.children?.length === 0) {
+            const superParent = node.parent.parent;
+            if (superParent && superParent.children) {
+                const index = superParent.children.findIndex(ch => ch === node.parent)
+                superParent.children.splice(index, 1)
+            }            
         }
     }
 
@@ -195,7 +193,6 @@ class DocumentModel {
         if (!node || !node.children || !this.#cursor?.parent?.children) {
             throw new Error("moveCursorTo: node must be a valid node with children")
         }
-        const cursorParent = this.#cursor.parent;
         const cursorChildren = this.#cursor.parent.children
         const newEditor: { tag: string, attributes?: Attributes} = { tag: "EditorCursor" }
         if (this.#cursor.attributes) {
@@ -204,7 +201,7 @@ class DocumentModel {
         if (index === -1) {
             node.children.push(newEditor)
         } else {
-            node.children.splice(index, 0, newEditor)
+            node.children.splice(index+1, 0, newEditor)
         }
         cursorChildren.splice(this.#getCursorIndex(), 1)
         this.#cursor = newEditor
